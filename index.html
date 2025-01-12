@@ -44,21 +44,32 @@
       margin-bottom: 1rem;
     }
 
+    /* Enhanced Button Style */
     a {
       display: inline-block;
-      color: #1e90ff;
+      color: #ffffff;
       text-decoration: none;
-      padding: 10px 20px;
+      padding: 15px 25px;
       margin: 10px;
-      border: 1px solid #1e90ff;
-      border-radius: 5px;
+      background-color: #1e90ff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
-      font-size: 1rem;
     }
 
     a:hover {
-      background-color: #1e90ff;
-      color: #121212;
+      background-color: #1c86e3;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+    }
+
+    a:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     }
 
     footer {
@@ -74,14 +85,14 @@
 </head>
 <body>
   <header>
-    <h1>Welcome to My GitHub Pages</h1>
+    <h1>Vinh's CSE 160 Projects</h1>
   </header>
   <main>
-    <p>Explore my projects and assignments below:</p>
+    <p>Assignments below:</p>
     <a href="Assignment 0/asg0.html">Assignment 0</a>
   </main>
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Vinh Le. All rights reserved.</p>
   </footer>
 </body>
 </html>
