@@ -1,2 +1,2 @@
 # CSE160
-# Repository for Assignments
+Repository for Assignments
