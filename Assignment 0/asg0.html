@@ -1,0 +1,47 @@
+<!-- Vinh Le vihle@ucsc.edu -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Assignment 0</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="asg0" width="400" height="400">
+      Please use a browser that supports "canvas"
+    </canvas>
+    
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+    <script src="asg0.js"></script>
+    <div>
+      <label>v1:</label>
+      <label>x:</label><input id="v1-x" type="text">
+      <label>y:</label><input id="v1-y" type="text">
+    </div>
+    <div>
+      <label>v2:</label>
+      <label>x:</label><input id="v2-x" type="text">
+      <label>y:</label><input id="v2-y" type="text">
+    </div>
+    <input type="button" value="Draw" onclick="handleDrawEvent()"></input>
+
+    <br></br>
+
+    <div>
+      <label>Operation:</label>
+      <select id="operation">
+          <option value="add">Add</option>
+          <option value="sub">Subtract</option>
+          <option value="mul">Multiply</option>
+          <option value="div">Divide</option>
+          <option value="ang">Angle Between</option>
+          <option value="are">Area</option>
+          <option value="mag">Magnitude</option>
+          <option value="nom">Normalize</option>
+      </select>
+      <label>Scalar:</label><input id="scalar" type="text">
+  </div>
+  <input type="button" value="Draw" onclick="handleDrawOperationEvent()"></input>
+
+  </body>
+</html>
