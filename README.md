@@ -1,3 +1,2 @@
 # CSE160
-# CSE160
-# CSE160
+# Repository for Assignments
