@@ -3,27 +3,45 @@
   <head>
     <meta charset="utf-8" />
     <title>Change a point color</title>
+    <style>
+      #colorDisplay {
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      display: inline-block;
+      margin-left: 10px;
+    }
+    </style>
   </head>
 
   <body onload="main()">
     <canvas id="webgl" width="400" height="400">
     Please use a browser that supports "canvas"
     </canvas>
-    <p>
+    
+
+    <img src="Fox.png" alt="A geometric fox face" width="300" />
+    <p>Vinh Le vihle@ucsc.edu 1/19/2025</p>
+    <p>Notes for Grader: Added Erase Functionality, A Blue Button, Undo Button, and Color Display for Selected Color</p>
     <p id="numdot"> XXX</p>
     <button type="button" id="green">Green</button>
     <button type="button" id="red">Red</button>
+    <button type="button" id="blue">Blue</button>
+    <button type="button" id="eraser">Eraser</button>
     <button type="button" id="clearButton">Clear</button>
+    <button type="button" id="undoButton">Undo</button>
+    <button type="button" id="saveButton">Save Image</button>
     </p>
     <button type="button" id="pointButton">Point</button>
     <button type="button" id="triButton">Triangle</button>
     <button type="button" id="circleButton">Circle</button>
+    <button type="button" id="foxButton">Draw Fox Face</button>
     </p>
-    Red <input type="range" min="0" max="100" value="100" class="slider" id="redslide">
+    Selected Color: <div id="colorDisplay"></div>
     </p>
-    Green <input type="range" min="0" max="100" value="100" class="slider" id="greenslide">
-    </p>
-    Blue <input type="range" min="0" max="100" value="100" class="slider" id="blueslide">
+    Red: <input type="range" min="0" max="100" value="100" class="slider" id="redslide">
+    Green: <input type="range" min="0" max="100" value="100" class="slider" id="greenslide">
+    Blue: <input type="range" min="0" max="100" value="100" class="slider" id="blueslide">
     </p>
     Size <input type="range" min="5" max="40" value="0" class="slider" id="sizeslide">
     </p>
@@ -31,9 +49,9 @@
     </p>
   
 
-    <script src="../lib/webgl-utils.js"></script>
-    <script src="../lib/webgl-debug.js"></script>
-    <script src="../lib/cuon-utils.js"></script>
+    <script src="../Assignment 1/lib/webgl-utils.js"></script>
+    <script src="../Assignment 1/lib/webgl-debug.js"></script>
+    <script src="../Assignment 1/lib/cuon-utils.js"></script>
     <script src="Triangle.js"></script>
     <script src="Circle.js"></script>
     <script src="Point.js"></script>

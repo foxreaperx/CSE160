@@ -80,11 +80,17 @@ var FSHADER_SOURCE = `
   function addActionsForHtmlUI(){
     document.getElementById('green').onclick = function() { g_selectedColor = [0.0,1.0,0.0,1.0];};
     document.getElementById('red').onclick = function() { g_selectedColor = [1.0,0.0,0.0,1.0];};
+    document.getElementById('blue').onclick = function() { g_selectedColor = [0.0,0.0,1.0,1.0];};
+    document.getElementById('eraser').onclick = function() { g_selectedColor = [0.0,0.0,0.0,1.0];};
+    
+    document.getElementById('undoButton').onclick = function() { g_shapesList.pop(); renderAllShapes()};
     document.getElementById('clearButton').onclick = function() { g_shapesList=[]; renderAllShapes()};
+    document.getElementById('saveButton').addEventListener('click', function() {savePicture()});
 
     document.getElementById('pointButton').onclick = function() {g_selectedType=POINT};
     document.getElementById('triButton').onclick = function() {g_selectedType=TRIANGLE};
     document.getElementById('circleButton').onclick = function() {g_selectedType=CIRCLE};
+    document.getElementById('foxButton').onclick = function () {drawFoxFace();};
 
     document.getElementById('segmentslide').addEventListener('mouseup', function() { g_selectedSegments = this.value; });
     document.getElementById('redslide').addEventListener('mouseup', function() { g_selectedColor[0] = this.value/100; });
@@ -95,11 +101,67 @@ var FSHADER_SOURCE = `
 
   }
 
+  function drawFoxFace() {
+    const foxTriangles = [
+      // Main Face (Base - Orange)
+      { vertices: [-0.5, 0.5, 0.5, 0.5, 0.0, -0.4], color: [1.0, 0.5, 0.0, 1.0] },
+
+      // Main Ears (Base - Orange)
+      { vertices: [-0.2, 0.4, -0.6, 0.4, -0.6, 0.9], color: [1.0, 0.5, 0.0, 1.0] },
+      { vertices: [0.2, 0.4, 0.6, 0.4, 0.6, 0.9], color: [1.0, 0.5, 0.0, 1.0] },
+
+      // Inside Ears (Base - White)
+      { vertices: [-0.4, 0.5, -0.5, 0.5, -0.5, 0.7], color: [1.0, 1.0, 1.0, 1.0] },
+      { vertices: [0.4, 0.5, 0.5, 0.5, 0.5, 0.7], color: [1.0, 1.0, 1.0, 1.0] },
+
+      // Nose (Base - Black)
+      { vertices: [0.1, -0.2, 0.0, -0.1, -0.1, -0.2], color: [0.2, 0.2, 0.2, 1.0] },
+      { vertices: [0.1, -0.2, 0.0, -0.3, -0.1, -0.2], color: [0.7, 0.7, 0.7, 1.0] },
+
+      // Face Accent
+      { vertices: [0.0, 0.4, -0.2, 0.2, 0.0, 0.1], color: [0.9, 0.9, 0.9, 1.0] },
+      { vertices: [0.0, 0.4, 0.2, 0.2, 0.0, 0.1], color: [0.7, 0.7, 0.7, 1.0] },
+
+      // Eyes
+      { vertices: [-0.25, 0.25, -0.3, 0.3, -0.2, 0.3], color: [0.0, 0.0, 0.0, 1.0] },
+      { vertices: [-0.25, 0.35, -0.3, 0.3, -0.2, 0.3], color: [0.1, 0.1, 0.1, 1.0] },
+      { vertices: [0.25, 0.25, 0.3, 0.3, 0.2, 0.3], color: [0.0, 0.0, 0.0, 1.0] },
+      { vertices: [0.25, 0.35, 0.3, 0.3, 0.2, 0.3], color: [0.1, 0.1, 0.1, 1.0] },
+
+      // Face
+      { vertices: [-0.2, 0.1, 0.0, -0.1, 0.2, 0.1], color: [1.0, 0.6, 0.0, 1.0] },
+
+      // Face Fur
+      { vertices: [-0.3, 0.2, -0.6, 0.2, -0.1, -0.2], color: [1.0, 0.6, 0.0, 1.0] },
+      { vertices: [0.3, 0.2, 0.6, 0.2, 0.1, -0.2], color: [1.0, 0.6, 0.0, 1.0] },
+
+      { vertices: [-0.45, 0.45, -0.6, 0.2, -0.3, 0.2], color: [1.0, 1.0, 1.0, 1.0] },
+      { vertices: [0.45, 0.45, 0.6, 0.2, 0.3, 0.2], color: [1.0, 1.0, 1.0, 1.0] },
+      
+      { vertices: [-0.3, 0.5, 0.0, 0.6, 0.3, 0.5], color: [1.0, 0.4, 0.0, 1.0] },
+
+
+    ];
+  
+    // Render each triangle
+    foxTriangles.forEach(({ vertices, color }) => {
+      const triangle = new Triangle();
+      triangle.color = color;
+      triangle.render = function () {
+        gl.uniform4f(u_FragColor, this.color[0], this.color[1], this.color[2], this.color[3]);
+        drawTriangle(vertices);
+      };
+      triangle.render();
+      g_shapesList.push(triangle);
+    });
+  }
+
 function main() {
 
   setUpWebGL();
   connectVariablesToGLSL();
   addActionsForHtmlUI();
+  updateColorDisplay();
 
 
   // Register function (event handler) to be called on a mouse press
@@ -194,4 +256,50 @@ function sendTextToHTML(text, htmlID){
   }
 
   htmlElm.innerHTML = text;
+}
+
+
+
+
+
+// Get references to the sliders and the color display div
+const redSlider = document.getElementById("redslide");
+const greenSlider = document.getElementById("greenslide");
+const blueSlider = document.getElementById("blueslide");
+const colorDisplay = document.getElementById("colorDisplay");
+
+// Function to update the color display
+function updateColorDisplay() {
+  const red = redSlider.value;
+  const green = greenSlider.value;
+  const blue = blueSlider.value;
+
+  const red255 = Math.round((red / 100) * 255);
+  const green255 = Math.round((green / 100) * 255);
+  const blue255 = Math.round((blue / 100) * 255);
+
+  // Update the background color of the colorDisplay div
+  colorDisplay.style.backgroundColor = `rgb(${red255}, ${green255}, ${blue255})`;
+  colorDisplay.innerText = `Color`;
+}
+
+// Add event listeners to each slider to update the color display when the value changes
+redSlider.addEventListener("input", updateColorDisplay);
+greenSlider.addEventListener("input", updateColorDisplay);
+blueSlider.addEventListener("input", updateColorDisplay);
+
+function savePicture(){
+    // Get the canvas element
+    const canvas = document.getElementById('webgl');
+  
+    // Convert the canvas to a data URL (in PNG format)
+    const dataURL = canvas.toDataURL('image/png');
+    
+    // Create a temporary <a> element for downloading the image
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'my_drawing.png'; // Name of the file to download
+    
+    // Programmatically click the link to trigger the download
+    link.click();
 }

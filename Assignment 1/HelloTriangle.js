@@ -45,7 +45,8 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Draw the rectangle
-  drawTriangle([0, 0.5,   -0.5, -0.5,   0.5, -0.5]);
+  drawTriangle([0, 0.1,   -0.1, -0.1,   0.1, -0.1]);
+  
   //gl.drawArrays(gl.TRIANGLES, 0, n);
 }
 
