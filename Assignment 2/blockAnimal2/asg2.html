@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <body onload="main()">
+    <div class="segment" id="displayScreen">
+    <canvas id="webgl" width="700" height="700">
+    Please use a browser that supports "canvas"
+    </canvas>
+    </div>
+
+
+    
+
+
+    <p>Vinh Le vihle@ucsc.edu 2/2/2025</p>
+    <p>Notes for Grader: I made a turtle and one you take control of the legs you can make it look like it is swimming through water
+      another thing to know is that for the shift click function or poke button you are able to make it move faster and stick out its tongue. The shape
+    that I made was a Pyramid for its tail if you were to rotate it around. You are able to control through sliders or by click and draggin on the canvas. </p>
+    <p id="fps"> XXX</p>
+    <div class="slider-cont" id="cameraAngle">
+      Camera Control
+      <br>
+      X:<input type="range" min="-90" max="90" value="30" class="slider" id="camX">
+      <br>
+      Y:<input type="range" min="-90" max="90" value="30" class="slider" id="camY">
+      <br>
+      Z:<input type="range" min="-90" max="90" value="0" class="slider" id="camZ">
+    </div>
+    <button type="button" id="animationOn">Animation On</button>
+    <button type="button" id="animationOff">Animation Off</button>
+    <button type="button" id="poke">Poke</button>
+
+    <div class="slider-cont" id="leg-sliders">
+      Front Left Leg Controls: 
+      Lower <input type="range" min="0" max="10" value="0" class="slider" id="front-left-lower-slider">
+      Upper <input type="range" min="0" max="30" value="0" class="slider" id="front-left-upper-slider">
+      Front Right Leg Controls: 
+      Lower<input type="range" min="0" max="10" value="0" class="slider" id="front-right-lower-slider">
+      Upper<input type="range" min="0" max="30" value="0" class="slider" id="front-right-upper-slider">
+      <br><br>
+      Back Left Leg Controls: 
+      Lower <input type="range" min="0" max="10" value="0" class="slider" id="back-left-lower-slider">
+      Upper <input type="range" min="0" max="30" value="0" class="slider" id="back-left-upper-slider">
+      Back Right Leg Controls: 
+      Lower <input type="range" min="0" max="10" value="0" class="slider" id="back-right-lower-slider">
+      Upper <input type="range" min="0" max="30" value="0" class="slider" id="back-right-upper-slider">
+      
+
+    </div>
+    
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="Cube.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Point.js"></script>
+    <script src="Pyramid.js"></script>
+    <script src="asg2.js"></script>
+  </body>
+</html>
