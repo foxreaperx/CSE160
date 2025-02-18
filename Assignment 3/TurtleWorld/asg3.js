@@ -347,8 +347,6 @@ function connectVariablesToGLSL() {
   gl.uniformMatrix4fv(u_ViewMatrix, false, m.elements);
   gl.uniformMatrix4fv(u_ProjectionMatrix, false, m.elements);
 
-  //console.log("HI I GOT HERE");
-
   }
 
 
@@ -725,8 +723,6 @@ gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotMat.elements);
   sky.matrix.translate(-.3,-.5,-.3);
   sky.render();
 
-  
-
   var duration = performance.now() - startTime;
 
   sendTextToHTML("ms: " + Math.floor(duration) + " fps: " + Math.floor(10000/duration)/10, "fps");
@@ -737,7 +733,6 @@ function sendTextToHTML(text, htmlID){
   var htmlElm = document.getElementById(htmlID);
   if (!htmlElm){
     console.log("Failed to get " + htmlID + " from HTML");
-
   }
 
   htmlElm.innerHTML = text;
