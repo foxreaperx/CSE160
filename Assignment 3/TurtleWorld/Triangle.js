@@ -149,7 +149,7 @@ function drawTriangle(vertices) {
     // Enable the assignment to a_Position variable
     gl.enableVertexAttribArray(a_UV);
   
-    gl.drawArrays(gl.TRIANGLES, 0, n);
+    gl.drawArrays(gl.TRIANGLES, 0, n/3);
     
     //return n;
   }
