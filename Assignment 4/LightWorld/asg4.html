@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Change color</title>
+    <style>
+      #colorDisplay {
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      display: inline-block;
+      margin-left: 10px;
+    }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <div class="segment" id="displayScreen">
+    <canvas id="webgl" width="1000" height="1000">
+    Please use a browser that supports "canvas"
+    </canvas>
+    </div>
+
+
+    
+
+
+    <p>Vinh Le vihle@ucsc.edu 3/3/2025</p>
+    <p>Notes for Grader:Notes to Grader: <br>
+      - Click on canvas to look around and ESC to exit that view <br>
+      - WASD can be used for movement and Q and E to look around (Note: Lags if you hold especially on look good mode so ideally tap to move)<br>
+      - You are also able to you space to go up and left contrl to go down<br>  
+      - Did all parts except for spotlight</p>
+
+    <p id="fps"> XXX</p>
+    <brk></brk>
+    <button type="button" id="NormOn">Normal On</button>
+    <button type="button" id="NormOff">Normal Off</button>
+    <button type="button" id="light-on">Light On</button>
+    <button type="button" id="light-off">Light Off</button>
+
+    <br>
+    X: <input type="range" min="-250" max="500" value="0" class="slider" id="light-x">
+    <br>
+    Y: <input type="range" min="-100" max="550" value="100" class="slider" id="light-y">
+    <br>
+    Z: <input type="range" min="-250" max="500" value="-200" class="slider" id="light-z">
+    <br>
+  </p>
+  Selected Color: <div id="colorDisplay"></div>
+
+    </p>
+    Red: <input type="range" min="0" max="100" value="100" class="slider" id="redslide">
+    Green: <input type="range" min="0" max="100" value="100" class="slider" id="greenslide">
+    Blue: <input type="range" min="0" max="100" value="100" class="slider" id="blueslide">
+    </p>
+    
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="Cube.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Point.js"></script>
+    <script src="Pyramid.js"></script>
+    <script src="Sphere.js"></script>
+    <script src="world.js"></script>
+    <script src="camera.js"></script>
+    <script src="asg4.js"></script>
+  </body>
+</html>
